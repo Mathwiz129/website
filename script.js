@@ -1,4 +1,4 @@
-const backendURL = 'https://https://vercel.com/mathwiz129s-projects/website/B8qby3ZEHAz4YvG5tJW3t92EA72B';
+const backendURL = 'https://website-blond-omega.vercel.app/';
 
 function sendMessage() {
     const messageInput = document.getElementById('messageInput');
