@@ -1,5 +1,7 @@
 const backendURL = 'https://website-blond-omega.vercel.app';
 
+const messagesDiv = document.getElementById('messages');
+
 function sendMessage() {
     const messageInput = document.getElementById('messageInput');
     const message = messageInput.value;

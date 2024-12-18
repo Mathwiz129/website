@@ -21,7 +21,7 @@ const Message = mongoose.model('Message', messageSchema);
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors()); // Allow all origins for development ease
+app.use(cors()); // Allow all origins for simplicity
 
 // Routes
 app.post('/send', async (req, res) => {
