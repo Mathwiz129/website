@@ -1,4 +1,4 @@
-const backendURL = 'https://website-blond-omega.vercel.app/';
+const backendURL = 'https://website-blond-omega.vercel.app';
 
 function sendMessage() {
     const messageInput = document.getElementById('messageInput');
@@ -15,10 +15,11 @@ function sendMessage() {
         .then(response => response.json())
         .then(data => {
             const messageElement = document.createElement('div');
-            messageElement.textContent = data.message;
+            messageElement.textContent = data.text;
             messagesDiv.appendChild(messageElement);
             messageInput.value = '';
-        });
+        })
+        .catch(error => console.error('Error:', error));
     }
 }
 
@@ -32,7 +33,8 @@ function fetchMessages() {
                 messageElement.textContent = msg.text;
                 messagesDiv.appendChild(messageElement);
             });
-        });
+        })
+        .catch(error => console.error('Error:', error));
 }
 
 fetchMessages();
