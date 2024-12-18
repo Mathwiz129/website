@@ -11,11 +11,12 @@ function sendMessage() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ message }),
+            mode: 'no-cors'
         })
-        .then(response => response.json())
-        .then(data => {
+        .then(() => {
+            console.log('Message sent');
             const messageElement = document.createElement('div');
-            messageElement.textContent = data.text;
+            messageElement.textContent = message;
             messagesDiv.appendChild(messageElement);
             messageInput.value = '';
         })
@@ -24,17 +25,13 @@ function sendMessage() {
 }
 
 function fetchMessages() {
-    fetch(`${backendURL}/messages`)
-        .then(response => response.json())
-        .then(messages => {
-            messagesDiv.innerHTML = '';
-            messages.forEach(msg => {
-                const messageElement = document.createElement('div');
-                messageElement.textContent = msg.text;
-                messagesDiv.appendChild(messageElement);
-            });
-        })
-        .catch(error => console.error('Error:', error));
+    fetch(`${backendURL}/messages`, {
+        mode: 'no-cors'
+    })
+    .then(() => {
+        console.log('Messages fetched');
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 fetchMessages();

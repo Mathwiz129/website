@@ -21,11 +21,7 @@ const Message = mongoose.model('Message', messageSchema);
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors({
-    origin: 'https://oakesbr.com', // Allow requests from your frontend domain
-    methods: ['GET', 'POST'],
-    optionsSuccessStatus: 200 // Some legacy browsers choke on 204
-}));
+app.use(cors()); // Allow all origins for development ease
 
 // Routes
 app.post('/send', async (req, res) => {
