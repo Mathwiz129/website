@@ -1,12 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/messaging-app', {
+// Connect to MongoDB (use your own connection string if deployed remotely)
+mongoose.connect('mongodb://localhost:27017/messaging-app', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
@@ -19,11 +18,10 @@ const messageSchema = new mongoose.Schema({
 
 const Message = mongoose.model('Message', messageSchema);
 
-// Middleware
+// Middleware to parse JSON bodies
 app.use(bodyParser.json());
-app.use(cors()); // Allow all origins for simplicity
 
-// Routes
+// Route to handle sending a message
 app.post('/send', async (req, res) => {
     const { message } = req.body;
     const newMessage = new Message({ text: message });
@@ -31,6 +29,7 @@ app.post('/send', async (req, res) => {
     res.json(newMessage);
 });
 
+// Route to fetch all messages
 app.get('/messages', async (req, res) => {
     const messages = await Message.find();
     res.json(messages);
