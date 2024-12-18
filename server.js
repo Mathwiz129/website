@@ -1,13 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
+// Middleware
+app.use(bodyParser.json());
+app.use(cors()); // Allow all origins for simplicity
+
+// In-memory storage (replace with a database for persistence)
 let messages = [];
 
-app.use(bodyParser.json());
-app.use(express.static('public'));
-
+// Routes
 app.post('/send', (req, res) => {
     const { message } = req.body;
     messages.push(message);
